@@ -1,0 +1,117 @@
+import 'package:flutter/material.dart'; 
+void main() { 
+  runApp(MyApp()); 
+} 
+class MyApp extends StatelessWidget { 
+  @override 
+  Widget build(BuildContext context) { 
+    return MaterialApp( 
+      title: 'Weather App', 
+      theme: ThemeData( 
+        primarySwatch: Colors.blue, 
+        fontFamily: 'Roboto', // Use a suitable font 
+      ), 
+      home: WeatherScreen(), 
+    ); 
+  } 
+} 
+class WeatherScreen extends StatelessWidget { 
+  @override 
+  Widget build(BuildContext context) { 
+    return Scaffold( 
+      body: Container( 
+        decoration: BoxDecoration( 
+          image: DecorationImage( 
+            image: AssetImage( 
+                'assets/background.jpg'), // Replace with your background image 
+            fit: BoxFit.cover, 
+          ), 
+        ), 
+        child: SafeArea( 
+          child: Padding( 
+            padding: const EdgeInsets.all(16.0), 
+            child: Column( 
+              crossAxisAlignment: CrossAxisAlignment.start, 
+              children: [ 
+                Row( 
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+                  children: [ 
+                    Text( 
+                      'BURSA', 
+                      style: TextStyle( 
+                        color: Colors.white, 
+                        fontSize: 24, 
+                        fontWeight: FontWeight.bold, 
+                      ), 
+                    ), 
+                    Icon(Icons.more_vert, color: Colors.white), 
+                  ], 
+                ), 
+                Text( 
+                  'THU, JUL 22', 
+                  style: TextStyle(color: Colors.white, fontSize: 16), 
+                ), 
+                SizedBox(height: 20), 
+                Text( 
+                  '22°', 
+                  style: TextStyle( 
+                    color: Colors.white, 
+                    fontSize: 64, 
+                    fontWeight: FontWeight.w300, 
+                  ), 
+                ), 
+                Text( 
+                  'clear sky', 
+                  style: TextStyle(color: Colors.white, fontSize: 18), 
+                ), 
+                SizedBox(height: 20), 
+                Row( 
+                  mainAxisAlignment: MainAxisAlignment.spaceAround, 
+                  children: [ 
+                    _buildInfoColumn('Humidity', '61%'), 
+                    _buildInfoColumn('Wind', '0.7 km/h'), 
+                    _buildInfoColumn('Real Feel', '22°'), 
+                  ], 
+                ), 
+                SizedBox(height: 30), 
+                Expanded( 
+                  child: ListView( 
+                    children: [ 
+                      _buildForecastRow('Fri, Jul 23', Icons.cloud, '28°'), 
+                      _buildForecastRow('Sat, Jul 24', Icons.wb_sunny, '31°'), 
+                      _buildForecastRow('Sun, Jul 25', Icons.cloud, '28°'), 
+                      _buildForecastRow('Mon, Jul 26', Icons.wb_sunny, '34°'), 
+                      _buildForecastRow('Tue, Jul 27', Icons.wb_sunny, '22°'), 
+                    ], 
+                  ), 
+                ) 
+              ], 
+            ), 
+          ), 
+        ), 
+      ), 
+    ); 
+  } 
+  Widget _buildInfoColumn(String label, String value) { 
+    return Column( 
+      children: [ 
+        Text(label, style: TextStyle(color: Colors.white70)), 
+        Text(value, style: TextStyle(color: Colors.white)), 
+      ], 
+    ); 
+  } 
+  Widget _buildForecastRow(String day, IconData icon, String temp) { 
+    return Padding( 
+      padding: const EdgeInsets.symmetric(vertical: 8.0), 
+      child: Row( 
+        mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+        children: [ 
+          Text(day, style: TextStyle(color: Colors.white)), 
+          Icon(icon, color: Colors.white), 
+          Text(temp, style: TextStyle(color: Colors.white)), 
+        ], 
+      ), 
+    ); 
+  } 
+} 
+ 
